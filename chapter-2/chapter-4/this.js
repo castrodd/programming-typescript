@@ -8,8 +8,11 @@ function correctDate() {
     return `${this.getMonth()}/${this.getDate()}/${this.getFullYear()}`
 }
 
-console.log(fancyDate.call(new Date))
-console.log(correctDate.call(new Date))
-
 // TypeError: this.getDate is not a function
 //console.log(fancyDate())
+
+// 27/function getMonth() { [native code] }/2022
+console.log(fancyDate.call(new Date))
+
+// 6/27/2022
+console.log(correctDate.call(new Date))
