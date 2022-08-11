@@ -9,9 +9,9 @@ function withDebug<C extends ClassConstructor<{
         }
 
         debug() {
-            let Name = Class.constructor.name
+            let name = Class.name
             let value = this.getDebugValue()
-            return `${Name} (${JSON.stringify(value)})`
+            return `((${name}) (${JSON.stringify(value)}))`
         }
     }
 }
