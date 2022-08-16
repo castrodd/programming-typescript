@@ -1,21 +1,6 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var Exercise = /** @class */ (function () {
-    function Exercise() {
-    }
-    return Exercise;
-}());
+class Exercise {
+    constructor() { }
+}
 // Cannot extend a class 'Exercise'. 
 // Class constructor is marked as private.
 //
@@ -24,23 +9,52 @@ var Exercise = /** @class */ (function () {
 // and only accessible within the class declaration.
 //
 // new Exercise()
-var MoreExercise = /** @class */ (function () {
-    function MoreExercise() {
-        console.log("parent");
-    }
-    return MoreExercise;
-}());
-var ExerciseThree = /** @class */ (function (_super) {
-    __extends(ExerciseThree, _super);
-    function ExerciseThree() {
-        var _this = _super.call(this) || this;
+class MoreExercise {
+    constructor() { console.log("parent"); }
+}
+class ExerciseThree extends MoreExercise {
+    constructor() {
+        super();
         console.log("child");
-        return _this;
     }
-    return ExerciseThree;
-}(MoreExercise));
+}
 // Constructor of class 'MoreExercise' is protected 
 // and only accessible within the class declaration.
 //
 // new MoreExercise()
 new ExerciseThree();
+class BalletFlat {
+    constructor() {
+        this.purpose = 'dancing';
+    }
+}
+class Boot {
+    constructor() {
+        this.purpose = 'woodcutting';
+    }
+}
+class Sneaker {
+    constructor() {
+        this.purpose = 'walking';
+    }
+}
+// type Create = {
+//     create(type: 'balletFlat'): BalletFlat
+//     create(type: 'boot'): Boot
+//     create(type: 'sneaker'): Sneaker
+// }
+let Shoe = {
+    create(type) {
+        switch (type) {
+            case 'balletFlat': return new BalletFlat;
+            case 'boot': return new Boot;
+            case 'sneaker': return new Sneaker;
+        }
+    }
+};
+let a = Shoe.create('balletFlat');
+let b = Shoe.create('boot');
+let c = Shoe.create('sneaker');
+console.log(a.constructor.name, a.purpose);
+console.log(b.constructor.name, b.purpose);
+console.log(c.constructor.name, c.purpose);
