@@ -79,7 +79,8 @@ console.log(c.constructor.name, c.purpose)
 
 // 4. Typesafe builder pattern
 
-// Not typesafe
+// Not typesafe!
+
 class RequestBuilder {
     private data: object | null = null
     private method: 'get' | 'post' | null = null
@@ -109,7 +110,8 @@ new RequestBuilder()
     .setURL('/users')
     .send()
 
-// Typesafe
+// Typesafe --- not correct!
+
 class SafeRequestBuilder {
     private url: string | null = null
     private method: 'get' | 'post' | null = null
