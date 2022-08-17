@@ -1,3 +1,5 @@
+// 2. Private vs. public
+
 class Exercise {
     private constructor() {}
 }
@@ -31,7 +33,8 @@ class ExerciseThree extends MoreExercise {
 new ExerciseThree()
 
 
-// Factory pattern
+// 3. Factory pattern
+
 type Shoe = {
     purpose: string
 }
@@ -72,3 +75,101 @@ let c = Shoe.create('sneaker')
 console.log(a.constructor.name, a.purpose)
 console.log(b.constructor.name, b.purpose)
 console.log(c.constructor.name, c.purpose)
+
+
+// 4. Typesafe builder pattern
+
+// Not typesafe
+class RequestBuilder {
+    private data: object | null = null
+    private method: 'get' | 'post' | null = null
+    private url: string | null = null
+
+    setMethod(method: 'get' | 'post'): this {
+        this.method = method
+        return this
+    }
+
+    setData(data: object): this {
+        this.data = data
+        return this
+    }
+
+    setURL(url: string): this {
+        this.url = url
+        return this
+    }
+
+    send() {
+        console.log(`RequestBuilder: ${this.method} / ${this.data} / ${this.url}`)
+    }
+}
+
+new RequestBuilder()
+    .setURL('/users')
+    .send()
+
+// Typesafe
+class SafeRequestBuilder {
+    private url: string | null = null
+    private method: 'get' | 'post' | null = null
+    private data: object | null = null
+
+    constructor(
+        url: string | null = null,
+        method: 'get' | 'post' | null = null,
+        data: object | null = null) {
+            this.url = url,
+            this.method = method,
+            this.data = data
+        }
+
+    setURL(url: string | null): SafeRequestBuilder {
+        this.url = url
+        if (url) {
+            return new SafeRequestBuilder(url)
+        }
+        return new SafeRequestBuilder()
+    }
+
+    setMethod(method: 'get' | 'post'): SafeRequestBuilder | null {
+        if (!this.url) {
+            new Error('setURL must be called first.')
+        }
+        
+        this.method = method
+        if (method) {
+            return new SafeRequestBuilder(this.url, method)
+        }
+        return new SafeRequestBuilder()
+    }
+
+    setData(data: object): SafeRequestBuilder {
+        if (!this.url) {
+            return new SafeRequestBuilder()
+        }
+
+        if (!this.method) {
+            return new SafeRequestBuilder()
+        }
+
+        this.data = data
+        return new SafeRequestBuilder(
+            this.url,
+            this.method,
+            this.data
+        )
+    }
+
+    send() {
+        if (this.method && this.url) {
+            console.log(`SafeRequestBuilder: ${this.method} : ${this.data} : ${this.url}`)
+        } else {
+            return new Error('Missing method or url!')
+        }
+    }
+}
+
+new SafeRequestBuilder()
+    .setURL('/users')
+    .send()
