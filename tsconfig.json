@@ -5,9 +5,7 @@
         "outDir": "dist",
         "sourceMap": true,
         "strict": true,
-        "target": "es2015"
-    },
-    "include": [
-        "src"
-    ]
+        "target": "es2015",
+        "strictNullChecks": false
+    }
 }

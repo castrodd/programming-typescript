@@ -26,6 +26,16 @@ const y: 15 = 15
 let newY = y // 15
 
 // null or undefined gets widened to any
-let z = undefined
-z = 141
+let z = null
+z = 3
 z = 'b'
+
+// Variables get typed when leaving initial scope
+function scoping() {
+    let a = null // any
+    a = 1        // any
+    a = '1'      // any
+    return a
+}
+
+scoping()        // string
