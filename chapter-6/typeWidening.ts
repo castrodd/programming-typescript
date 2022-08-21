@@ -39,3 +39,7 @@ function scoping() {
 }
 
 scoping()        // string
+
+// Use as const to opt out of type widening
+let a3 = {x: 3}           // {x: number}
+let a4 = {x: 3} as const  // readonly {x: 3}
