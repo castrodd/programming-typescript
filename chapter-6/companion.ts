@@ -11,9 +11,11 @@ let Currency = {
     }
 }
 
+// Currency as type
 let amountDue: Currency = {
     unit: 'JPY',
     value: 88888.88
 }
 
+// Currency as value
 let otherAmountDue = Currency.from(330, 'EUR')
