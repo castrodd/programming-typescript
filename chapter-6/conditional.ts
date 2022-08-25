@@ -33,3 +33,4 @@ type AnElement22 = ElementType2<any[]>       // any
 type AnElement222 = ElementType2<unknown[]>  // unknown
 type AnElement3 = ElementType2<boolean>      // boolean
 type AnElement33 = ElementType2<(a: string, b: number) => boolean>  // (a: string, b: number) => boolean
+
