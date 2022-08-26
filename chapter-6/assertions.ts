@@ -41,3 +41,26 @@ function removeFromDOM(dialog: Dialog, element: Element) {
     element.parentNode!.removeChild(element)
     delete dialog.id
 }
+
+
+// Definite assignment assertions (from book)
+let userId!: string
+fetchUser()
+
+userId.toUpperCase()
+
+function fetchUser() {
+    userId = globalCache.get('userId')
+
+
+}
+
+// Refactored
+
+let userIdTwo: string = fetchUserTwo()
+
+userIdTwo.toUpperCase()
+
+function fetchUserTwo(): string {
+    return globalCache.get('userId')
+}
