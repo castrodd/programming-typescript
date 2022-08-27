@@ -46,19 +46,15 @@ function removeFromDOM(dialog: Dialog, element: Element) {
 // Definite assignment assertions (from book)
 let userId!: string
 fetchUser()
-
 userId.toUpperCase()
 
 function fetchUser() {
     userId = globalCache.get('userId')
-
-
 }
 
 // Refactored
 
 let userIdTwo: string = fetchUserTwo()
-
 userIdTwo.toUpperCase()
 
 function fetchUserTwo(): string {

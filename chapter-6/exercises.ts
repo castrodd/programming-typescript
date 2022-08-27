@@ -88,3 +88,42 @@ enum F {
 let eO: E.O
 // Type 'E.O' is not assignable to type 'F'.
 // const fO: F.O = eO
+
+
+
+//// Exercise 2
+type P = {a: {b: {c: string}}}
+type K = keyof P // "a"
+type K2 = keyof P['a']['b'] // 'c'
+
+
+
+//// Exercise 3
+type Exclusive<T, U> = Exclude<T, U> | Exclude<U, T>
+type sample = Exclusive<1 | 2 | 3, 2 | 3 | 4> // 1 | 4
+type sampleTwo = Exclusive<1 | 2, 2 | 4> // 1 | 4
+
+
+
+//// Exercise 4
+// Definite assignment assertion
+const globalCache = new Map()
+globalCache.set('nonNullUserId', 'alwaysHere')
+
+// Definite assignment assertion here
+let nonNullUserId!: string
+
+fetchUser()
+nonNullUserId.toUpperCase()
+
+function fetchNonNullUser() {
+    userId = globalCache.get('nonNullUserId')
+}
+
+// No definite assignment assertion
+let nonNullUserIdTwo: string = fetchNonNullUserTwo()
+userIdTwo.toUpperCase()
+
+function fetchNonNullUserTwo(): string {
+    return globalCache.get('nonNullUserId')
+}
